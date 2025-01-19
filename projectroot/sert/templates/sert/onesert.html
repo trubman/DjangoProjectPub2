@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Сертификат качества :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid" style="background-color: #87CEFA;">
+    <h2>Сертификат:</h2>
+    <table class="table table-bordered" style="--bs-table-striped-bg: #DCDCDC;">
+      <thead style="--bs-table-bg: #A9A9A9;">
+        <tr class="text-center">
+          <th scope="col" style="min-width: 40px; max-width: 40px;">Измени</th>
+          <th scope="col" style="min-width: 40px; max-width: 40px;">Печать</th>
+          <th scope="col">Номер</th>
+          <th scope="col">Тип</th>
+          <th scope="col">Дата</th>
+          <th scope="col">Дата для гальв.</th>
+          <th scope="col">Драг.мет.</th>
+          <th scope="col">Тип заключения</th>
+          <th scope="col">Тип гарантии</th>
+          <th scope="col">Тип подписантов</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="text-center">
+            <td>
+                <a class="page-link" href="{{ sert.get_absolute_url }}">
+                    <span class="badge text-bg-primary">Измени</span>
+                </a>
+            </td>
+            <td>
+                {% if sert.is_print %}
+                    П Е Ч А Т Ь
+                {% else %}
+                    НЕ ПЕЧАТЬ
+                {% endif %}
+            </td>
+            <td class="text-center">{{sert.number_unique.id}}</td>
+            <td>{{sert.sert_type}}</td>
+            <td>{{sert.date}}</td>
+            <td>{{sert.galvan_date}}</td>
+             <td class="text-center">
+                {% if item.is_drag_met %}
+                    ДА
+                {% else %}
+                    НЕТ
+                {% endif %}
+            </td>
+            <td>
+                {% if sert.conclusion_type is None %}
+                    НЕТ
+                {% else %}
+                    {{sert.conclusion_type}}
+                {% endif %}
+            </td>
+            <td>
+                {% if sert.guarantee_type is None %}
+                    НЕТ
+                {% else %}
+                    {{sert.guarantee_type}}
+                {% endif %}
+            </td>
+            <td>
+                {% if sert.sign_type is None %}
+                    НЕТ
+                {% else %}
+                    {{sert.sign_type}}
+                {% endif %}
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <hr>
+</div>
+
+<div class="container-fluid">
+    <h2>Продукт:</h2>
+    <table class="table table-bordered" style="--bs-table-striped-bg: #DCDCDC;">
+      <thead style="--bs-table-bg: #A9A9A9;">
+        <tr class="text-center">
+          <th scope="col" style="min-width: 40px; max-width: 40px;">Измени</th>
+          <th scope="col">СПГ</th>
+          <th scope="col">Обозначение</th>
+          <th scope="col">Наименование</th>
+          <th scope="col">Количество</th>
+          <th scope="col">Атомка</th>
+          <th scope="col">Атом.контракт</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="text-center">
+            <td>
+                <a class="page-link" href="{{ sert.number_spg.get_absolute_url }}">
+                    <span class="badge text-bg-primary">Измени</span>
+                </a>
+            </td>
+            <td>{{sert.number_spg.number_spg}}</td>
+            <td>{{sert.number_spg.designation}}</td>
+            <td>{{sert.number_spg.denomination}}</td>
+            <td>{{sert.number_spg.quantity}}</td>
+            <td>
+                {% if sert.number_spg.is_atom %}
+                    ДА
+                {% else %}
+                    НЕТ
+                {% endif %}
+            </td>
+            <td>
+                {% if not sert.number_spg.atom_contract %}
+                    НЕТ
+                {% else %}
+                    {{sert.number_spg.atom_contract}}
+                {% endif %}
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <hr>
+</div>
+
+<div class="container-fluid">
+    <h2>Вложения:</h2>
+    {% if attachs %}
+    <table class="table table-striped table-bordered" style="--bs-table-striped-bg: #DCDCDC;">
+      <thead style="--bs-table-bg: #A9A9A9;">
+        <tr class="text-center">
+          <th scope="col" style="width: 40px;">№</th>
+          <th scope="col" style="width: 40px;">ID</th>
+          <th scope="col" style="min-width: 40px; max-width: 40px;">Измени</th>
+          <th scope="col">Обозначение</th>
+          <th scope="col">Наименование</th>
+          <th scope="col">Количество</th>
+          <th scope="col">Ед.изм.</th>
+          <th scope="col">Галв.мат.</th>
+          <th scope="col">Галв.ед.изм.</th>
+          <th scope="col">Отливка</th>
+          <th scope="col">ID плавки</th>
+          <th scope="col">Ассим.</th>
+          <th scope="col">Глубина влож.</th>
+          <th scope="col">Связь ДО</th>
+          <th scope="col">Связь ПОСЛЕ</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in attachs %}
+          <tr class="text-center">
+            <td>{{ forloop.counter }}</td>
+            <td>{{ item.id }}</td>
+            <td>
+                <a class="page-link" href="{{ item.get_absolute_url }}">
+                    <span class="badge text-bg-primary">Измени</span>
+                </a>
+            </td>
+            <td>{{ item.designation }}</td>
+            <td>{{ item.denomination }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.item_units }}</td>
+            <td>
+                {% if item.galvan_units is not None %}
+                    {{item.galvan_units}}
+                {% endif %}
+            </td>
+            <td>
+                {% if item.galvan_material is not None %}
+                    {{item.galvan_material}}
+                {% endif %}
+            </td>
+            <td>
+                {% if item.is_cast %}
+                    ДА
+                {% else %}
+                    НЕТ
+                {% endif %}
+            </td>
+            <td>
+                {% if item.is_cast %}
+                    {{item.melt_number}}-{{item.material_id}}-{{item.melt_year}}-{{item.melt_passport}}
+                {% endif %}
+            </td>
+            <td>
+                {% if item.n_index %}
+                    {{ item.n_index }}
+                {% endif %}
+            </td>
+            <td>
+                {% if item.is_one %}
+                    Первая
+                {% elif item.is_two %}
+                    Вторая
+                {% elif item.is_three %}
+                    Третья
+                {% elif item.is_four %}
+                    Четвертая
+                {% endif %}
+            </td>
+            <td>
+                {% if item.is_one %}
+
+                {% elif item.is_two %}
+                    {% if item.b_index is not None %}
+                        {{ item.b_index }}
+                    {% endif %}
+                {% elif item.is_three %}
+                    {% if item.b1_index is not None %}
+                        {{ item.b1_index }}
+                    {% endif %}
+                {% elif item.is_four %}
+                    {% if item.b2_index is not None %}
+                        {{ item.b2_index }}
+                    {% endif %}
+                {% endif %}
+            </td>
+            <td>
+                {% if item.is_one %}
+                    {% if item.a_index is not None %}
+                        {{ item.a_index }}
+                    {% endif %}
+                {% elif item.is_two %}
+                    {% if item.a1_index is not None %}
+                        {{ item.a1_index }}
+                    {% endif %}
+                {% elif item.is_three %}
+                    {% if item.a2_index is not None %}
+                        {{ item.a2_index }}
+                    {% endif %}
+                {% elif item.is_four %}
+
+                {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>У сертификата нет вложений.</p>
+    {% endif %}
+    <hr>
+</div>
+
+<div class="container-fluid">
+    <h2>Плавки:</h2>
+    {% if melts %}
+    <table class="table table-striped table-bordered" style="--bs-table-striped-bg: #DCDCDC;">
+      <thead style="--bs-table-bg: #A9A9A9;">
+        <tr class="text-center">
+          <th scope="col" style="width: 40px;">№</th>
+          <th scope="col" style="width: 40px;">Измени</th>
+          <th scope="col">Плавка</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in melts %}
+          <tr class="text-center">
+            <td>{{ forloop.counter }}</td>
+            <td>
+                <a class="page-link" href="{{ item.get_absolute_url }}">
+                    <span class="badge text-bg-primary">Измени</span>
+                </a>
+            </td>
+            <td>{{item.melt_id}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>У сертификата нет плавок.</p>
+    {% endif %}
+    <hr>
+</div>
+
+{% endblock %}

@@ -1,1 +1,1 @@
-# DjangoProjectPub2
+# DjangoProjectPub

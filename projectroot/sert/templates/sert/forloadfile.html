@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Загрузка записей :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid my-1" style="background-color: #87CEFA;">
+    <form class="container-fluid" enctype="multipart/form-data" method="post">
+        <div class="row g-2">
+            {% csrf_token %}
+            <div class="col-auto">
+                <button class="btn btn-outline-primary my-2 me-2" type="submit">Загрузи XLSX-файл</button>
+            </div>
+            <div class="col-auto">
+                <a class="btn btn-outline-primary my-2 me-2" href="{% url 'getform' %}" role="button">Дай форму для загрузки</a>
+            </div>
+            {{ form.as_p }}
+        </div>
+    </form>
+</div>
+
+{% if messages %}
+    <div class="container-fluid">
+        {% for m in messages %}
+            {% if m.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <div class="container-fluid my-2" style="background-color: #98FB98;">
+                    <h6 style="color: #006400;">{{ m }}</h6>
+                </div>
+            {% elif m.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <div class="container-fluid my-2" style="background-color: #FFA07A;">
+                    <h6 style="color: #8B0000;">{{ m }}</h6>
+                </div>
+            {% elif m.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                <div class="container-fluid my-2" style="background-color: #F0E68C;">
+                    <h6>{{ m }}</h6>
+                </div>
+            {% elif m.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                <div class="container-fluid my-2" style="background-color: #AFEEEE;">
+                    <h6>{{ m }}</h6>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+{% endblock %}

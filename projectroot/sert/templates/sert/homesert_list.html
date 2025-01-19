@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Журнал сертификатов качества :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid my-1" style="background-color: #87CEFA;">
+    <div class="container-fluid">
+        <form class="d-flex" role="search" method="GET" action="{% url 'searchsert' %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-primary my-2 me-2" type="submit">Ищи</button>
+            <input class="form-control my-2" type="search" placeholder="Искомое (чувствительно к регистру)" aria-label="Search" name="searched">
+        </form>
+    </div>
+</div>
+<div class="container-fluid">
+    <table class="table table-striped table-bordered" style="--bs-table-striped-bg: #DCDCDC;">
+      <thead style="--bs-table-bg: #A9A9A9;">
+        <tr>
+          <th class="text-center" scope="col" style="width: 40px;">№</th>
+          <th class="text-center" scope="col" style="min-width: 40px; max-width: 40px;">На печать</th>
+          <th class="text-center" scope="col">Номер</th>
+          <th scope="col">Дата</th>
+          <th scope="col">№СПГ</th>
+          <th scope="col">Тип</th>
+          <th scope="col">Продукт</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in serts %}
+          <tr>
+            <th class="text-center">
+                {% if page_obj %}
+                    {{ page_obj.start_index|add:forloop.counter0 }}
+                {% else %}
+                    {{ forloop.counter }}
+                {% endif %}
+            </th>
+            <td class="text-center">
+                {% if item.is_print %}
+                    <a class="page-link" href="{% url 'is_print_switch' item.id %}">
+                        <span class="badge text-bg-success">П Е Ч А Т Ь</span>
+                    </a>
+                {% else %}
+                    <a class="page-link" href="{% url 'is_print_switch' item.id %}">
+                        <span class="badge text-bg-secondary">НЕ ПЕЧАТЬ</span>
+                    </a>
+                {% endif %}
+            </td>
+            <td class="text-center">
+                <a class="page-link" href="{% url 'onesert' item.id %}">
+                    <span class="badge text-bg-primary">{{item.number_unique.id}}</span>
+                </a>
+            </td>
+            <td>{{item.date}}</td>
+            <td>
+                <a class="link" href="#">
+                    {{item.number_spg.number_spg}}
+                </a>
+            </td>
+            <td>{{item.sert_type}}</td>
+            <td>{{item.number_spg.designation}} {{item.number_spg.denomination}} - {{item.number_spg.quantity}} шт.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+{% endblock %}

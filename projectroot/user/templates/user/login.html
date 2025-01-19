@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Авторизация :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <div class="container-fluid my-4">
+        <div class="card text-bg-info mb-3" style="max-width: 20rem; min-width: 20rem;">
+          <div class="card-header text-center">
+            <h5 class="card-title">Авторизация</h5>
+          </div>
+          <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Авторизоваться</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+
+{% endblock %}

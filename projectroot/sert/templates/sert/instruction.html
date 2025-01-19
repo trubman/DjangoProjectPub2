@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Руководство пользователя :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="background-color: #87CEFA;">
+  <div class="container-fluid">
+    <div class="row g-2" >
+      <div class="col-auto">
+        <a class="btn btn-outline-danger my-2" href="{% url 'getexamples' %}" role="button">Дай типовые примеры</a>
+      </div>
+      <div class="col-auto position-relative">
+        <h3 class="position-absolute bottom-0" style="width: 800px;">Руководство пользователя:</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        #1 Интерфейс
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+          <img src="{% static '/instruction/1.png' %}" width="1200">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        #2 Структура
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <img src="{% static '/instruction/2.png' %}" width="1200">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        #3 Особые условия
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <img src="{% static '/instruction/3.png' %}" width="1200">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+        #4 НАСОС, АРМАТУРА
+      </button>
+    </h2>
+    <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <img src="{% static '/instruction/4.png' %}" width="1200">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+        #5 НАСОС_КУСОЧКИ, АРМАТУРА_КУСОЧКИ
+      </button>
+    </h2>
+    <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <img src="{% static '/instruction/5.png' %}" width="1200">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+        #6 РЕМКОМПЛЕКТ
+      </button>
+    </h2>
+    <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <img src="{% static '/instruction/6.png' %}" width="1200">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+        #7 ГАЛЬВАНИКА
+      </button>
+    </h2>
+    <div id="collapse7" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <img src="{% static '/instruction/7.png' %}" width="1200">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+        #8 НАСОС_ХИМ, АРМАТУРА_ХИМ, СЕРТ_ЦТК_ГГ_НАСОС
+      </button>
+    </h2>
+    <div id="collapse8" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <img src="{% static '/instruction/8.png' %}" width="1200">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+        #9 СЕРТ_ЦТК, СЕРТ_ЦТК_НТ_ВЭЛВ
+      </button>
+    </h2>
+    <div id="collapse9" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <img src="{% static '/instruction/9.png' %}" width="1200">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

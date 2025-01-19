@@ -1,0 +1,17 @@
+{% if user.is_authenticated %}
+<nav class="navbar" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <div class="container-fluid my-1">
+      <a class="btn" href="{% url 'homesert' %}" role="button">
+        <h1>Журнал сертификатов качества</h1>
+      </a>
+    </div>
+    <div class="container-fluid my-1">
+      <a class="btn btn-outline-success" href="{% url 'printsert' %}" role="button">Сделай сертификат</a>
+      <a class="btn btn-outline-primary" href="{% url 'loadfile' %}" role="button">Внеси записи</a>
+      <a class="btn btn-outline-danger" href="{% url 'instruction' %}" role="button">Научи как пользоваться</a>
+      <a class="btn btn-outline-dark" href="{% url 'logout' %}" role="button">ВЫХОД</a>
+    </div>
+  </div>
+</nav>
+{% endif %}
